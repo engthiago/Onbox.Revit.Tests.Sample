@@ -1,6 +1,7 @@
 name: send_tests_to_DA
 
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["Build Test Project"]
     branches: [master]
