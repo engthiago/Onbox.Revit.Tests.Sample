@@ -3,7 +3,7 @@ name: 02 - Sent Tests to DA
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Build Test Project"]
+    workflows: ["01 - Build Test Project"]
     branches: [master]
     types:
       - completed
@@ -12,7 +12,9 @@ jobs:
     
     runs-on: windows-latest
     steps: 
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v2.0.8
+      - name: Download Artifact
+        uses: dawidd6/action-download-artifact@v2.11.0
+        with:
+          workflow: 01 - Build Test Project
       - name: Display structure of downloaded files
         run: ls -R
