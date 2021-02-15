@@ -1,0 +1,24 @@
+name: .NET
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+    - name: Nuget Restore
+      run: nuget restore "Onbox.Revit.Tests.Sample.sln"
+    - name: Build Project
+      run: msbuild "Onbox.Revit.Tests.Sample.sln" /p:Configuration=R2019 /p:Platform=x64
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        path: tests\Onbox.Revit.Tests\test_project.zip
