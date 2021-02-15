@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onbox.Revit.Tests.Sample", "src\Onbox.Revit.Tests.Sample\Onbox.Revit.Tests.Sample.csproj", "{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{17B63756-7820-482A-AAF0-36AAD6522189}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		D2019|x64 = D2019|x64
+		D2020|x64 = D2020|x64
+		D2021|x64 = D2021|x64
+		R2019|x64 = R2019|x64
+		R2020|x64 = R2020|x64
+		R2021|x64 = R2021|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.D2019|x64.ActiveCfg = D2019|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.D2019|x64.Build.0 = D2019|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.D2020|x64.ActiveCfg = D2020|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.D2020|x64.Build.0 = D2020|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.D2021|x64.ActiveCfg = D2021|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.D2021|x64.Build.0 = D2021|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.R2019|x64.ActiveCfg = R2019|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.R2019|x64.Build.0 = R2019|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.R2020|x64.ActiveCfg = R2020|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.R2020|x64.Build.0 = R2020|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.R2021|x64.ActiveCfg = R2021|x64
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7}.R2021|x64.Build.0 = R2021|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8641D635-3F09-4FBC-9579-F4DF5CEEF1A7} = {17B63756-7820-482A-AAF0-36AAD6522189}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {757000C3-194A-4523-A2D8-06AA7337BC1A}
+	EndGlobalSection
+EndGlobal

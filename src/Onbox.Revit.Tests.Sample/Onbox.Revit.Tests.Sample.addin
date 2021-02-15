@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Onbox.Revit.Tests.Sample App</Name>
+    <Assembly>Onbox.Revit.Tests.Sample/Onbox.Revit.Tests.Sample.dll</Assembly>
+    <AddInId>8641d635-3f09-4fbc-9579-f4df5ceef1a7</AddInId>
+    <FullClassName>Onbox.Revit.Tests.Sample.Revit.App</FullClassName>
+    <VendorId>Onbox.Revit.Tests.Sample</VendorId>
+    <VendorDescription>Onbox.Revit.Tests.Sample</VendorDescription>
+    <AllowLoadingIntoExistingSession>true</AllowLoadingIntoExistingSession>
+  </AddIn>
+</RevitAddIns>
