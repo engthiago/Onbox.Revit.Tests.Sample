@@ -22,7 +22,7 @@ jobs:
 #      uses: actions/upload-artifact@v2.2.2
 #      with:
 #        path: tests\Onbox.Revit.Tests\test_project.zip
-    - name: Login to Forge
+    - name: Login
       uses: wei/curl@master
       with:
          args: |
