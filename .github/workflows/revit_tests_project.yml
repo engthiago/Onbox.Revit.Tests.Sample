@@ -38,5 +38,6 @@ jobs:
           $headers.Add("Content-Type", "application/zip")
           $app_id = "revit_tests"
           $test_project = tests\Onbox.Revit.Tests\test_project.zip
-          $response = Invoke-RestMethod 'https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip' -Method 'PUT' -Infile $test_project -Headers $headers -Body $body
+          $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip"
+          $response = Invoke-RestMethod $url -Method 'PUT' -Infile $test_project -Headers $headers -Body $body
           Write-Host $response
