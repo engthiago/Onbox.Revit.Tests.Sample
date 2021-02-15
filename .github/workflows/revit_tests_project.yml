@@ -37,7 +37,7 @@ jobs:
           $headers.Add("accept-encoding", "gzip, deflate")
           $headers.Add("Content-Type", "application/zip")
           $app_id = "revit_tests"
-          $test_project = tests\Onbox.Revit.Tests\test_project.zip
+          $test_project = "tests\Onbox.Revit.Tests\test_project.zip"
           $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip"
           $response = Invoke-RestMethod $url -Method 'PUT' -Infile $test_project -Headers $headers -Body $body
           Write-Host $response
