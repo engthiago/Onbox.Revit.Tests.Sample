@@ -28,6 +28,6 @@ jobs:
          script: |
             $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
             $headers.Add("Content-Type", "application/x-www-form-urlencoded")
-            $body = "client_id=${{ secrets.CLIENT_ID }}&grant_type=client_credentials&scope=code%3Aall%20data%3Awrite%20data%3Aread%20bucket%3Acreate%20bucket%3Adelete"
+            $body = "client_id=${{ secrets.CLIENT_ID }}&client_secret=${{ secrets.CLIENT_SECRET }}&grant_type=client_credentials&scope=code%3Aall%20data%3Awrite%20data%3Aread%20bucket%3Acreate%20bucket%3Adelete"
             $response = Invoke-RestMethod 'https://developer.api.autodesk.com/authentication/v1/authenticate' -Method 'POST' -Headers $headers -Body $body
             $response | ConvertTo-Json
