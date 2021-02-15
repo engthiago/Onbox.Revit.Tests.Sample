@@ -1,4 +1,4 @@
-name: Build Test Project
+name: 01 - Build Test Project
 
 on:
   workflow_dispatch: 
