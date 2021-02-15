@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project>
+  <Target Name="Package Tests" AfterTargets="AfterBuild">
+    <ZipDirectory SourceDirectory="$(TargetDir)" 
+                  DestinationFile="test_project.zip" 
+                  Overwrite="true"/>
+  </Target>
+</Project>
