@@ -9,16 +9,25 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
-    - name: Nuget Restore
-      run: nuget restore "Onbox.Revit.Tests.Sample.sln"
-    - name: Build Project
-      run: msbuild "Onbox.Revit.Tests.Sample.sln" /p:Configuration=R2019 /p:Platform=x64
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.2.2
-      with:
-        path: tests\Onbox.Revit.Tests\test_project.zip
+#    - uses: actions/checkout@v2
+#    - name: Setup MSBuild
+#      uses: microsoft/setup-msbuild@v1
+#    - name: Setup NuGet
+#      uses: NuGet/setup-nuget@v1.0.5
+#    - name: Nuget Restore
+#      run: nuget restore "Onbox.Revit.Tests.Sample.sln"
+#    - name: Build Project
+#      run: msbuild "Onbox.Revit.Tests.Sample.sln" /p:Configuration=R2019 /p:Platform=x64
+#    - name: Upload a Build Artifact
+#      uses: actions/upload-artifact@v2.2.2
+#      with:
+#        path: tests\Onbox.Revit.Tests\test_project.zip
+    - name: Login to Forge
+      run: |
+        curl --location --request POST 'https://developer.api.autodesk.com/authentication/v1/authenticate' \
+        --header 'Content-Type: application/x-www-form-urlencoded' \
+        --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlU3c0dGRldUTzlBekNhSzBqZURRM2dQZXBURVdWN2VhIn0.eyJzY29wZSI6WyJjb2RlOmFsbCIsImRhdGE6d3JpdGUiLCJkYXRhOnJlYWQiLCJidWNrZXQ6Y3JlYXRlIiwiYnVja2V0OmRlbGV0ZSJdLCJjbGllbnRfaWQiOiJ1ZlFWWGRLVVZFR1dHVFNKc3dtUk9kT3RYR3EwMU5zaCIsImF1ZCI6Imh0dHBzOi8vYXV0b2Rlc2suY29tL2F1ZC9hand0ZXhwNjAiLCJqdGkiOiJoaWFFNUJWbWFoMUNKTERsTU1hMUpDR0lSN0w3Qzk0a1QxclRzS2doQlpMVjQ3M05FUnBMMEVlbWhZOXQ5NmpTIiwiZXhwIjoxNjEzMzk3OTU2fQ.M7-43Clp_DpMkp7QzUUGaCngmow1jTpnVcLjb5XfhLOEQUZIQT2bWfyXoOCAAGpfnKGsf54UfGAgVZWMtdEv7thyU2X8COmGbBfw_2MvnV7bfJvZenzm_veMtLKWF-kN8UfcgR7dg2LjOJmROr48EvVIsrDi7g6l1IBa-EbCgrLnl-gosAvnq79Jid3AC5vn3fTEmPMPTuJNYufyGMwP71lsxelKCroqh-sMlUiSvV9QZpR0v_urmrphbkxxFaUc8nV-3lZjURtqFBzXcUe3M5Esu-M4VMLxEVRqENkrL5UweamTxNqlKmmlYv1pygC1fwvbsDt0YrCacvjUVTxpGw' \
+        --data-urlencode 'client_id=${{ secrets.CLIENT_ID }}' \
+        --data-urlencode 'client_secret=${{ secrets.CLIENT_SECRET }}' \
+        --data-urlencode 'grant_type=client_credentials' \
+        --data-urlencode 'scope=code:all data:write data:read bucket:create bucket:delete'
