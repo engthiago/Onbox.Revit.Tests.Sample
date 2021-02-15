@@ -1,4 +1,4 @@
-name: send_tests_to_DA
+name: 02 - Sent Tests to DA
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
     types:
       - completed
 jobs:
-  Send to DA:
+  send_test_to_DA:
     
     runs-on: windows-latest
     steps: 
