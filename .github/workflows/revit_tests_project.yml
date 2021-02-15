@@ -23,10 +23,4 @@ jobs:
 #      with:
 #        path: tests\Onbox.Revit.Tests\test_project.zip
     - name: Login to Forge
-      run: |
-        curl --location --request POST 'https://developer.api.autodesk.com/authentication/v1/authenticate' \
-        --header 'Content-Type: application/x-www-form-urlencoded' \
-        --data-urlencode 'client_id=${{ secrets.CLIENT_ID }}' \
-        --data-urlencode 'client_secret=${{ secrets.CLIENT_SECRET }}' \
-        --data-urlencode 'grant_type=client_credentials' \
-        --data-urlencode 'scope=code:all data:write data:read bucket:create bucket:delete'
+      run: curl --location --request POST 'https://developer.api.autodesk.com/authentication/v1/authenticate' --header 'Content-Type: application/x-www-form-urlencoded' --data-urlencode 'client_id=${{ secrets.CLIENT_ID }}' --data-urlencode 'client_secret=${{ secrets.CLIENT_SECRET }}' --data-urlencode 'grant_type=client_credentials' --data-urlencode 'scope=code:all data:write data:read bucket:create bucket:delete'
