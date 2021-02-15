@@ -1,4 +1,4 @@
-name: Send to DA
+name: send_tests_to_DA
 
 on:
   workflow_run:
