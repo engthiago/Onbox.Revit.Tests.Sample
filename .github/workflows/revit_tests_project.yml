@@ -23,7 +23,7 @@ jobs:
 #      with:
 #        path: tests\Onbox.Revit.Tests\test_project.zip
      - name: Post
-     - uses: Amadevus/pwsh-script@v2.0.1
+       uses: Amadevus/pwsh-script@v2.0.1
        with:
          script: |
             $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
