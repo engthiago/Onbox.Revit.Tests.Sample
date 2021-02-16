@@ -19,8 +19,11 @@ jobs:
             $response.Save("result.xml")
             [xml]$xml = Get-Content result.xml
             $test_cases = $xml.SelectNodes("//test-case")
+            Write-Host Reading results...
+            Write-Host
             ForEach($case in $test_cases){
             	if ($case."result" -ne "Passed") {
+                Write-Host TEST-ERROR ****
             		Write-Host test case  : $case."fullname" -ForegroundColor red
             		Write-Host result     : $case."result" -ForegroundColor red
             		Write-Host
