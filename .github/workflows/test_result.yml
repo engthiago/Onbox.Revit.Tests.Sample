@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+
+      - name: Test Script
+        run: |
+          dir
+      - name: Download
+        uses: Amadevus/pwsh-script@v2.0.1
+        with:
+          script: |
+            Write-Host Downloading...
+            $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$resultFile/signed?access=readwrite"
+            $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File results.xml
+      - name: Test Script
+        run: |
+          dir
