@@ -19,4 +19,4 @@ jobs:
             $data = Get-Content -Path result.xml
             Write-Host xml file: $data
             [xml]$XmlDocument = Get-Content -Path result.xml
-            $XmlDocument.test-run | Format-Table -AutoSize
+            $XmlDocument."test-run" | Format-Table -AutoSize
