@@ -1,4 +1,4 @@
-name: CI
+name: 02 - Read Results
 
 on:
   workflow_dispatch:
@@ -17,7 +17,6 @@ jobs:
             $url = "https://developer.api.autodesk.com/oss/v2/signedresources/13e7ef86-3351-4971-8fae-9be9ac366046?region=US"
             $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File result.xml
             $data = Get-Content -Path result.xml
-            Write-Host $data
-      - name: Test Script
-        run: |
-          dir
+            Write-Host xml file: $data
+            [xml]$XmlDocument = Get-Content -Path result.xml
+            $XmlDocument.test-run | Format-Table -AutoSize
