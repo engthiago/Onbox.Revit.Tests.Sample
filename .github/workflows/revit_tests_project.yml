@@ -47,7 +47,6 @@ jobs:
         # Get Download Signed URL
         $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
         $headers.Add("Authorization", "Bearer $token")
-        $headers.Add("Content-Type", "application/json")
         $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip/signed"
         $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers
         $download_url = $response."signedUrl"
@@ -55,7 +54,6 @@ jobs:
         # Get Upload Signed URL
         $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
         $headers.Add("Authorization", "Bearer $token")
-        $headers.Add("Content-Type", "application/json")
         $resultFile = "result.xml"
         $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$resultFile/signed?access=readwrite"
         $response = Invoke-RestMethod -Method 'POST' -Headers $headers
