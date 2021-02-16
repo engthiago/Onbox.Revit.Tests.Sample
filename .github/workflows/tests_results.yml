@@ -5,7 +5,7 @@ on:
 
 jobs:
   test_results:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Post
         uses: Amadevus/pwsh-script@v2.0.1
