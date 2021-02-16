@@ -5,18 +5,12 @@ on:
 
 jobs:
   test_results:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Post
         uses: Amadevus/pwsh-script@v2.0.1
         with:
           script: |
-            $url = "https://developer.api.autodesk.com/oss/v2/signedresources/6a2d37c5-adab-414f-993c-83149d58bb72?region=US"
-            $results = "result.xml"
-            $response = Invoke-RestMethod $url -Method 'GET' -OutFile $results
-            Get-Content result.xml
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        if: always()
-        with:
-          files: result.xml
+            $WebClient = New-Object System.Net.WebClient
+            $WebClient.DownloadFile("https://developer.api.autodesk.com/oss/v2/signedresources/342a4135-07d2-4e8b-8283-4a61dd6472bb?region=US","result.xml")
+            Get-Content -Path result.xml
