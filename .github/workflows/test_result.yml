@@ -16,11 +16,25 @@ jobs:
             Write-Host Downloading...
             $url = "https://developer.api.autodesk.com/oss/v2/signedresources/13e7ef86-3351-4971-8fae-9be9ac366046?region=US"
             $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File result.xml
-            [xml]$XML = Get-Content result.xml
-                $TOTAL = $XML.'test-run'.total
-                $PASSED = $XML.'test-run'.passed
-                $FAILED = $XML.'test-run'.failed
-                $INCONCLUSIVE = $XML.'test-run'.inconclusive
-                $SKIPPED = $XML.'test-run'.skipped
-                $DURATION = $XML.'test-run'.duration
-            Write-Host Test total $TOTAL passed $PASSED
+            [xml]$xml = Get-Content result.xml
+            $test_cases = $xml.SelectNodes("//test-case")
+            $color = [console]::ForegroundColor
+            $err = 0
+            ForEach($case in $test_cases){
+            	if ($case."result" -ne "Passed") {
+            		[console]::ForegroundColor="red"; $_;
+            		$err = 1
+            		$case
+            	} else {
+            		[console]::ForegroundColor="green"; $_;
+            		$case
+            	}
+            }
+            
+            if ($err -eq 1) {
+            	[console]::ForegroundColor="red"; $_;
+            	throw "ONE OR MORE TEST FAILED!"
+            }
+            
+            [console]::ForegroundColor = $color 
+            Write-Host Finished Test Report
