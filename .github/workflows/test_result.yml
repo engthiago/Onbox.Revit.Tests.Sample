@@ -2,7 +2,11 @@ name: 02 - Read Results
 
 on:
   workflow_dispatch:
-
+   inputs:
+    url:
+      description: 'Result xml download link'
+      required: true
+    
 jobs:
   build:
     runs-on: windows-latest
@@ -14,7 +18,7 @@ jobs:
         with:
           script: |
             Write-Host Downloading...
-            $url = "https://developer.api.autodesk.com/oss/v2/signedresources/13e7ef86-3351-4971-8fae-9be9ac366046?region=US"
+            $url = ${{ github.event.inputs.logLevel }}
             $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File result.xml
             [xml]$xml = Get-Content result.xml
             $test_cases = $xml.SelectNodes("//test-case")
