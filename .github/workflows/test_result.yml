@@ -16,6 +16,5 @@ jobs:
             Write-Host Downloading...
             $url = "https://developer.api.autodesk.com/oss/v2/signedresources/13e7ef86-3351-4971-8fae-9be9ac366046?region=US"
             $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File result.xml
-            $path = "result.xml"
-            [xml]$doc = Get-Content -Path $path
-            $doc | Format-Table -AutoSize
+            [xml]$XmlDocument = Get-Content -Path result.xml
+            $XmlDocument | Format-Table -AutoSize
