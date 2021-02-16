@@ -18,5 +18,4 @@ jobs:
             $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File result.xml
             $path = "result.xml"
             [xml]$doc = Get-Content -Path $path
-            $xpath = "test-run/test-suite/test-suite"
-            Select-Xml -Xml $doc -XPath $xpath 
+            $doc | Format-Table -AutoSize
