@@ -18,7 +18,7 @@ jobs:
         with:
           script: |
             Write-Host Downloading...
-            $url = ${{ github.event.inputs.logLevel }}
+            $url = ${{ github.event.inputs.url }}
             $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File result.xml
             [xml]$xml = Get-Content result.xml
             $test_cases = $xml.SelectNodes("//test-case")
