@@ -49,7 +49,7 @@ jobs:
         $headers.Add("Authorization", "Bearer $token")
         $headers.Add("Content-Type", "application/json")
         $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip/signed"
-        $response = Invoke-RestMethod $url -Method 'POST'
+        $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers
         $download_url = $response."signedUrl"
         Write-Host Got signed download url: Url $download_url
         # Get Upload Signed URL
