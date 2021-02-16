@@ -9,16 +9,15 @@ jobs:
 
     steps:
 
-      - name: Test Script
-        run: |
-          dir
       - name: Download
         uses: Amadevus/pwsh-script@v2.0.1
         with:
           script: |
             Write-Host Downloading...
             $url = "https://developer.api.autodesk.com/oss/v2/signedresources/13e7ef86-3351-4971-8fae-9be9ac366046?region=US"
-            $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File results.xml
+            $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File result.xml
+            $data = Get-Content -Path result.xml
+            Write-Host $data
       - name: Test Script
         run: |
           dir
