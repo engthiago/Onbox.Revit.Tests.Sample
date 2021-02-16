@@ -37,9 +37,4 @@ jobs:
             		Write-Host
             	}
             }
-            
-            if ($err -eq 1) {
-            	throw "ONE OR MORE TEST FAILED!"
-            } else {
-            	Write-Host All test passed! -ForegroundColor green
-            }
+            throw "ONE OR MORE TEST FAILED!"
