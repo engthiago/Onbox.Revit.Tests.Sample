@@ -15,8 +15,7 @@ jobs:
             $results = "result.xml"
             $response = Invoke-RestMethod $url -Method 'GET' -OutFile $results
       - name: NUnit Report
-        uses: MirageNet/nunit-reporter@8abbab7fdac37ef57d1621a5cfa508cdf000428f
+        uses: EnricoMi/publish-unit-test-result-action@v1
         with:
-          access-token: ${{ secrets.GITHUB_TOKEN }}
-          path: result.xml
+          files: result.xml
           
