@@ -1,3 +1,5 @@
+![01 - Build Test Project](https://github.com/engthiago/Onbox.Revit.Tests.Sample/workflows/01%20-%20Build%20Test%20Project/badge.svg)
+![02 - Test Results Report](https://github.com/engthiago/Onbox.Revit.Tests.Sample/workflows/02%20-%20Test%20Results%20Report/badge.svg)
 ## Continous Integration Sample for Revit based on Design Automation on Autodesk Forge
 
 ### Tech used
