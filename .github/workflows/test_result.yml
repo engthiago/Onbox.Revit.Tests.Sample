@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       link:
-        description: 'Results.xml download link'
+        description: 'result XML download link'
         required: true
 jobs:
   build:
