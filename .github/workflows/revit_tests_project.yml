@@ -67,9 +67,10 @@ jobs:
         $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
         $headers.Add("Authorization", "Bearer $token")
         $headers.Add("Content-Type", "application/json")
-        $client_id = ${{ secrets.CLIENT_ID }}
+        $client_id = "${{ secrets.CLIENT_ID }}"
         $activity_alias = "ac_tests"
         $test_assembly_name = "Onbox.Revit.Tests.dll"
+        $url = "https://developer.api.autodesk.com/da/us-east/v3/workitems"
         $body = "{`n        `"activityId`": `"$client_id.$client_id+$activity_alias`",`n        `"arguments`": {`n          `"inputAssembly`": {`n            `"url`": `"$download_url`"`n          },`n          `"config`": {`n              `"url`": `"data:application/json,{'assemblyPath': '$test_assembly_name'}`"`n          },`n          `"result`": {`n            `"verb`": `"put`",`n            `"url`": `"$upload_url`"`n          }`n        }`n      }"
-        $response = Invoke-RestMethod 'https://developer.api.autodesk.com/da/us-east/v3/workitems' -Method 'POST' -Headers $headers -Body $body
+        $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
         Write-Host Workitem sent $response."id" 
