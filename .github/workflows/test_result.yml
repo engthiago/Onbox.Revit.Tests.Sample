@@ -1,4 +1,4 @@
-name: 02 - Read Results
+name: 02 - Test Results Report
 
 on:
   workflow_dispatch:
