@@ -5,7 +5,7 @@ on:
 
 jobs:
   test_results:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Post
         uses: Amadevus/pwsh-script@v2.0.1
@@ -15,7 +15,10 @@ jobs:
             $results = "result.xml"
             $response = Invoke-RestMethod $url -Method 'GET' -OutFile $results
       - name: NUnit Report
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: dorny/test-reporter@v1
         with:
-          files: result.xml
-          
+          name: NUnit Tests
+          path: result.xml
+          reporter: dotnet-trx
+          list-suites: 'all'
+          fail-on-error: 'true'
