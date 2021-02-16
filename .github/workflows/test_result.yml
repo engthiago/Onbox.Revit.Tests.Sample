@@ -9,7 +9,7 @@ jobs:
 
     steps:
       
-      - name: Download
+      - name: Show Test Report
         uses: Amadevus/pwsh-script@v2.0.1
         with:
           script: |
@@ -21,10 +21,12 @@ jobs:
             $test_cases = $xml.SelectNodes("//test-case")
             Write-Host Reading results...
             Write-Host
+            $err = 0
             ForEach($case in $test_cases){
             	if ($case."result" -ne "Passed") {
+            		$err = 1
             		Write-Host test case  : $case."fullname" -ForegroundColor red
-            		Write-Host result     : $case."result" -ForegroundColor red
+            		Write-Host result     : $case."result".ToUpper() -ForegroundColor red
             		Write-Host
             	} else {
             		Write-Host test case  : $case."fullname" -ForegroundColor green
@@ -34,7 +36,7 @@ jobs:
             }
             
             if ($err -eq 1) {
-            	throw "ONE OR MORE TEST FAILED! Please check test cases above."
+            	throw "ONE OR MORE TEST FAILED!"
             } else {
             	Write-Host All test passed! -ForegroundColor green
             }
