@@ -16,7 +16,7 @@ jobs:
             Write-Host Downloading...
             $url = "https://developer.api.autodesk.com/oss/v2/signedresources/a83517ce-e219-44ba-8bcf-ffb35015e661?region=US"
             $response=Invoke-RestMethod $url
-            $response.Save("C:\Users\Thiago\Desktop\result.xml")
+            $response.Save("result.xml")
             [xml]$xml = Get-Content result.xml
             $test_cases = $xml.SelectNodes("//test-case")
             $color = [console]::ForegroundColor
