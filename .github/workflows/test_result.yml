@@ -23,7 +23,6 @@ jobs:
             Write-Host
             ForEach($case in $test_cases){
             	if ($case."result" -ne "Passed") {
-                Write-Host TEST-ERROR ****
             		Write-Host test case  : $case."fullname" -ForegroundColor red
             		Write-Host result     : $case."result" -ForegroundColor red
             		Write-Host
@@ -35,6 +34,7 @@ jobs:
             }
             
             if ($err -eq 1) {
-            	throw "ONE OR MORE TEST FAILED!"
+            	throw "ONE OR MORE TEST FAILED! Please check test cases above."
+            } else {
+            	Write-Host All test passed! -ForegroundColor green
             }
-            Write-Host Finished Test Report
