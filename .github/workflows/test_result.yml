@@ -17,7 +17,7 @@ jobs:
         with:
           script: |
             Write-Host Downloading...
-            $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$resultFile/signed?access=readwrite"
+            $url = "https://developer.api.autodesk.com/oss/v2/signedresources/13e7ef86-3351-4971-8fae-9be9ac366046?region=US"
             $response = Invoke-RestMethod $url -Method 'GET' -Headers $headers | Out-File results.xml
       - name: Test Script
         run: |
