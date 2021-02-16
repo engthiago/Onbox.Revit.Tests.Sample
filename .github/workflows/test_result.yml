@@ -20,4 +20,4 @@ jobs:
         uses: mavrosxristoforos/get-xml-info@1.0
         with:
           xml-file: result.xml
-          xpath: //test-run
+          xpath: test-run
