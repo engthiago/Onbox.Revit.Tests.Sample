@@ -1,0 +1,22 @@
+name: 02 - Test Results
+ 
+on:
+  workflow_dispatch:
+
+jobs:
+  test_results:
+    runs-on: windows-latest
+    steps:
+      - name: Post
+        uses: Amadevus/pwsh-script@v2.0.1
+        with:
+          script: |
+            $url = "https://developer.api.autodesk.com/oss/v2/signedresources/6a2d37c5-adab-414f-993c-83149d58bb72?region=US"
+            $results = "result.xml"
+            $response = Invoke-RestMethod $url -Method 'GET' -OutFile $results
+      - name: NUnit Report
+        uses: MirageNet/nunit-reporter@8abbab7fdac37ef57d1621a5cfa508cdf000428f
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          path: result.xml
+          
