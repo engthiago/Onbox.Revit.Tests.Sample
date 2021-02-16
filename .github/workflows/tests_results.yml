@@ -5,12 +5,15 @@ on:
 
 jobs:
   test_results:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
-      - name: Post
+      - name: Get Results XML
         uses: Amadevus/pwsh-script@v2.0.1
         with:
           script: |
             $WebClient = New-Object System.Net.WebClient
-            $WebClient.DownloadFile("https://developer.api.autodesk.com/oss/v2/signedresources/342a4135-07d2-4e8b-8283-4a61dd6472bb?region=US","result.xml")
+            $url = "https://developer.api.autodesk.com/oss/v2/signedresources/342a4135-07d2-4e8b-8283-4a61dd6472bb?region=US";
+            Invoke-WebRequest $url | Select-Object -ExpandProperty Content | Out-File "result.xml"
             Get-Content -Path result.xml
+      - name: List Files
+        run: ls
