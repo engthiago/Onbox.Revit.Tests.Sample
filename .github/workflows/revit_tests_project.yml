@@ -54,7 +54,7 @@ jobs:
         $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip/signed"
         $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
         $download_url = $response."signedUrl"
-        Write-Host Got signed download url: Url $download_url
+        Write-Host Got signed input url: Url $download_url
         # Get Upload Signed URL
         $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
         $headers.Add("Authorization", "Bearer $token")
@@ -64,7 +64,7 @@ jobs:
         $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$resultFile/signed?access=readwrite"
         $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
         $upload_url = $response."signedUrl"
-        Write-Host Got signed download url: Url $upload_url
+        Write-Host Got result download url: Url $upload_url
         # Send WorkItem
         $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
         $headers.Add("Authorization", "Bearer $token")
