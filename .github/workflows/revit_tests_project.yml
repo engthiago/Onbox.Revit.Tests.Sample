@@ -29,9 +29,9 @@ jobs:
       with:
        script: |
         # Acquire token
-        $bucket_key = ${{ client.BUCKET_KEY }}
-        $client_id = ${{ client.CLIENT_ID }}
-        $client_secret = ${{ client.CLIENT_SECRET }}
+        $bucket_key = ${{ secrets.BUCKET_KEY }}
+        $client_id = ${{ secrets.CLIENT_ID }}
+        $client_secret = ${{ secrets.CLIENT_SECRET }}
         $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
         $headers.Add("Content-Type", "application/x-www-form-urlencoded")
         $url = "https://developer.api.autodesk.com/authentication/v1/authenticate"
