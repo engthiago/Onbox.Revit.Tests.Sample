@@ -29,10 +29,13 @@ jobs:
       with:
        script: |
         # Acquire token
+        $bucket_key = ${{ client.BUCKET_KEY }}
+        $client_id = ${{ client.CLIENT_ID }}
+        $client_secret = ${{ client.CLIENT_SECRET }}
         $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
         $headers.Add("Content-Type", "application/x-www-form-urlencoded")
         $url = "https://developer.api.autodesk.com/authentication/v1/authenticate"
-        $body = "client_id=${{ secrets.CLIENT_ID }}&client_secret=${{ secrets.CLIENT_SECRET }}&grant_type=client_credentials&scope=code%3Aall%20data%3Awrite%20data%3Aread%20bucket%3Acreate%20bucket%3Adelete"
+        $body = "client_id=$client_id&client_secret=$client_secret&grant_type=client_credentials&scope=code%3Aall%20data%3Awrite%20data%3Aread%20bucket%3Acreate%20bucket%3Adelete"
         $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
         $token = $response."access_token"
         Write-Host Acquired adsk token
@@ -43,7 +46,7 @@ jobs:
         $headers.Add("Content-Type", "application/zip")
         $app_id = "revit_tests"
         $test_project = "tests\Onbox.Revit.Tests\test_project.zip"
-        $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip"
+        $url = "https://developer.api.autodesk.com/oss/v2/buckets/$bucket_key/objects/$app_id.zip"
         $response = Invoke-RestMethod $url -Method 'PUT' -Infile $test_project -Headers $headers
         Write-Host File Uploaded
         # Get Download Signed URL
@@ -51,7 +54,7 @@ jobs:
         $headers.Add("Authorization", "Bearer $token")
         $headers.Add("Content-Type", "application/json")
         $body = "{}"
-        $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip/signed"
+        $url = "https://developer.api.autodesk.com/oss/v2/buckets/$bucket_key/objects/$app_id.zip/signed"
         $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
         $download_url = $response."signedUrl"
         Write-Host Got signed input url: Url $download_url
@@ -61,7 +64,7 @@ jobs:
         $headers.Add("Content-Type", "application/json")
         $body = "{}"
         $resultFile = "result.xml"
-        $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$resultFile/signed?access=readwrite"
+        $url = "https://developer.api.autodesk.com/oss/v2/buckets/$bucket_key/objects/$resultFile/signed?access=readwrite"
         $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
         $upload_url = $response."signedUrl"
         Write-Host Got result download url: Url $upload_url
