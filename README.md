@@ -40,4 +40,14 @@ This repository already contains a sample project to get you started. It contain
   - After Workitem completed, go to Actions 02 - Test Results Report and fire up the workflow using the results download URL
 
 ## Postman Variables
-![Postman Variables](https://raw.githubusercontent.com/engthiago/Onbox.Revit.Tests.Sample/master/postman-variables.jpg)
+| Variable | Initial Value | Current Value |
+| -------- | ------------- | ------------- |
+| client_id | *your_client_id* | *your_client_id* |
+| client_secret | *your_client_secret* | *your_client_secret* |
+| bucket_key | *your_bucket_key* | *your_bucket_key* |
+| app_id | revit_tests | revit_tests |
+| app_description | Sample to run Design Automation for Revit Tests | Sample to run Design Automation for Revit Tests |
+| bundle_engine | Autodesk.Revit+2019 | Autodesk.Revit+2019 |
+| bundle_alias | app_tests | app_tests |
+| activity_alias | ac_tests | ac_tests |
+| test_assembly_name | Onbox.Revit.Tests.dll | Onbox.Revit.Tests.dll |
