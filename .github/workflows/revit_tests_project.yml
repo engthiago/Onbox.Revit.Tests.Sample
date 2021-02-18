@@ -43,7 +43,7 @@ jobs:
         $headers.Add("Content-Type", "application/zip")
         $app_id = "revit_tests"
         $test_project = "tests\Onbox.Revit.Tests\test_project.zip"
-        $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip"
+        $url = "https://developer.api.autodesk.com/oss/v2/buckets/${{ secrets.BUCKET_KEY }}/objects/$app_id.zip"
         $response = Invoke-RestMethod $url -Method 'PUT' -Infile $test_project -Headers $headers
         Write-Host File Uploaded
         # Get Download Signed URL
@@ -51,7 +51,7 @@ jobs:
         $headers.Add("Authorization", "Bearer $token")
         $headers.Add("Content-Type", "application/json")
         $body = "{}"
-        $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$app_id.zip/signed"
+        $url = "https://developer.api.autodesk.com/oss/v2/buckets/${{ secrets.BUCKET_KEY }}/objects/$app_id.zip/signed"
         $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
         $download_url = $response."signedUrl"
         Write-Host Got signed input url: Url $download_url
@@ -61,7 +61,7 @@ jobs:
         $headers.Add("Content-Type", "application/json")
         $body = "{}"
         $resultFile = "result.xml"
-        $url = "https://developer.api.autodesk.com/oss/v2/buckets/$app_id/objects/$resultFile/signed?access=readwrite"
+        $url = "https://developer.api.autodesk.com/oss/v2/buckets/${{ secrets.BUCKET_KEY }}/objects/$resultFile/signed?access=readwrite"
         $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
         $upload_url = $response."signedUrl"
         Write-Host Got result download url: Url $upload_url

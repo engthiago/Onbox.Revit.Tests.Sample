@@ -23,12 +23,13 @@ A build trigger can be fired by a commit, [the build artifacts will packaged](ht
 
 ## Getting Started
 This repository already contains a sample project to get you started. It contains a Design Automation Bundle zip and a Postman collection to make it easier to create the infrastructure on Forge like image above. There's a bit of setup the first time but after that the CI process will automatically run everytime a commit is done.
+  - Fork this repository
   - Clone this repository
   - Create your own Forge Application, make sure to enable Design Automation and Data Management API
-  - On your repo on Github, go to Settings -> Secrets and add client_id and client_secret as enviroment secrets from the Forge app 
+  - On your repo on Github, go to Settings -> Secrets and add client_id, client_secret and bucket_key as enviroment secrets from the Forge app 
   - Use Postman to import Postman collection located at ./remote_tests/revit_tests.postman_collection.json
   - Setup Postman environment variables (see next topic)
-  - On Postman, open Request: 03 - Upload App Bundle, to to Body and locate the specify the location of your revit_tests_bundle at .remote_tests/revit_tests.bundle.zip
+  - On Postman, open Request: 03 - Upload App Bundle, go to Body and specify the location of your revit_tests_bundle at .remote_tests/revit_tests.bundle.zip
   - Run Postman App Bundle folder: 00 - Authenticate -> 01 - Register App Bundle -> 02 - Upload App Bundle -> 03 - Create App Bundle Alias
   - Run Postman Activity folder: 01 - Create Activity -> 02 - Create Activity Alias
   - Run Postman: Cloud Storage folder: 01 - Create Bucket
@@ -39,4 +40,14 @@ This repository already contains a sample project to get you started. It contain
   - After Workitem completed, go to Actions 02 - Test Results Report and fire up the workflow using the results download URL
 
 ## Postman Variables
-![Postman Variables](https://raw.githubusercontent.com/engthiago/Onbox.Revit.Tests.Sample/master/postman-variables.jpg)
+| Variable | Initial Value | Current Value |
+| -------- | ------------- | ------------- |
+| client_id | *your_client_id* | *your_client_id* |
+| client_secret | *your_client_secret* | *your_client_secret* |
+| bucket_key | *unique_bucket_key* | *unique_bucket_key* |
+| app_id | revit_tests | revit_tests |
+| app_description | Sample to run Design Automation for Revit Tests | Sample to run Design Automation for Revit Tests |
+| bundle_engine | Autodesk.Revit+2019 | Autodesk.Revit+2019 |
+| bundle_alias | app_tests | app_tests |
+| activity_alias | ac_tests | ac_tests |
+| test_assembly_name | Onbox.Revit.Tests.dll | Onbox.Revit.Tests.dll |
