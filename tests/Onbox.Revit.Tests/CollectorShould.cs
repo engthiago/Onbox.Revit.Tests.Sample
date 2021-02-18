@@ -25,6 +25,12 @@ namespace Onbox.Revit.Tests
             Assert.AreNotEqual(levelId.IntegerValue, -1);
         }
 
+        [Test]
+        public void CollectFail()
+        {
+            Assert.AreEqual(2 + 2, 5);
+        }
+
         [OneTimeTearDown]
         public void CLoseRevitProj()
         {
