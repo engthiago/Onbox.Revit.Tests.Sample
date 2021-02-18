@@ -126,7 +126,7 @@
 			"name": "App Bundle",
 			"item": [
 				{
-					"name": "02 - Register App Bundle",
+					"name": "01 - Register App Bundle",
 					"event": [
 						{
 							"listen": "test",
@@ -191,7 +191,7 @@
 					"response": []
 				},
 				{
-					"name": "03 - Upload App Bundle",
+					"name": "02 - Upload App Bundle",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -282,7 +282,7 @@
 					"response": []
 				},
 				{
-					"name": "04 - Create App Bundle Alias",
+					"name": "03 - Create App Bundle Alias",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -327,7 +327,7 @@
 					"response": []
 				},
 				{
-					"name": "05 - Get App Bundles",
+					"name": "04 - Get App Bundles",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -356,7 +356,7 @@
 					"response": []
 				},
 				{
-					"name": "06 - Update Bundle",
+					"name": "05 - Update Bundle",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -579,7 +579,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"bucketKey\": \"{{app_id}}\",\n    \"access\": \"full\",\n    \"policyKey\": \"transient\"\n}"
+							"raw": "{\n    \"bucketKey\": \"{{bucket_key}}\",\n    \"access\": \"full\",\n    \"policyKey\": \"transient\"\n}"
 						},
 						"url": {
 							"raw": "https://developer.api.autodesk.com/oss/v2/buckets",
@@ -639,7 +639,7 @@
 							"variable": [
 								{
 									"key": "bucket_key",
-									"value": "{{app_id}}"
+									"value": "{{bucket_key}}"
 								},
 								{
 									"key": "object_key",
@@ -702,7 +702,7 @@
 							"variable": [
 								{
 									"key": "bucket_key",
-									"value": "{{app_id}}"
+									"value": "{{bucket_key}}"
 								},
 								{
 									"key": "object_key",
@@ -771,7 +771,7 @@
 							"variable": [
 								{
 									"key": "bucket_key",
-									"value": "{{app_id}}"
+									"value": "{{bucket_key}}"
 								},
 								{
 									"key": "object_key",
