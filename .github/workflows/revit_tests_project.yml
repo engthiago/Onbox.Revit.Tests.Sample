@@ -29,13 +29,11 @@ jobs:
       with:
        script: |
         # Acquire token
-        $bucket_key = ${{ secrets.BUCKET_K }}
-        $client_id = ${{ secrets.CLIENT_ID }}
-        $client_secret = ${{ secrets.CLIENT_SECRET }}
+        $bucket_key = ${{ secrets.BUCKET_KEY }}
         $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
         $headers.Add("Content-Type", "application/x-www-form-urlencoded")
         $url = "https://developer.api.autodesk.com/authentication/v1/authenticate"
-        $body = "client_id=$client_id&client_secret=$client_secret&grant_type=client_credentials&scope=code%3Aall%20data%3Awrite%20data%3Aread%20bucket%3Acreate%20bucket%3Adelete"
+        $body = "client_id=${{ secrets.CLIENT_ID }}&client_secret=${{ secrets.CLIENT_SECRET }}&grant_type=client_credentials&scope=code%3Aall%20data%3Awrite%20data%3Aread%20bucket%3Acreate%20bucket%3Adelete"
         $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
         $token = $response."access_token"
         Write-Host Acquired adsk token
