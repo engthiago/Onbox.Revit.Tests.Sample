@@ -44,7 +44,7 @@ This repository already contains a sample project to get you started. It contain
 | -------- | ------------- | ------------- |
 | client_id | *your_client_id* | *your_client_id* |
 | client_secret | *your_client_secret* | *your_client_secret* |
-| bucket_key | *your_bucket_key* | *your_bucket_key* |
+| bucket_key | *unique_bucket_key* | *unique_bucket_key* |
 | app_id | revit_tests | revit_tests |
 | app_description | Sample to run Design Automation for Revit Tests | Sample to run Design Automation for Revit Tests |
 | bundle_engine | Autodesk.Revit+2019 | Autodesk.Revit+2019 |
