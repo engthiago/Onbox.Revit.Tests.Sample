@@ -36,6 +36,12 @@ namespace Onbox.Revit.Tests
         }
 
         [Test]
+        public void ThisTestShouldFail()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
         public void ThrowExceptionWhenCreatingOutsideOfTransaction()
         {
             var collector = new CollectorService();
