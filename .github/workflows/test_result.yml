@@ -1,0 +1,44 @@
+name: 02 - Test Results Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      link:
+        description: 'result XML download link'
+        required: true
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      
+      - name: Show Test Report
+        uses: Amadevus/pwsh-script@v2.0.1
+        with:
+          script: |
+            Write-Host Downloading...
+            $url = "${{ github.event.inputs.link }}"
+            $response=Invoke-RestMethod $url
+            $response.Save("result.xml")
+            [xml]$xml = Get-Content result.xml
+            $test_cases = $xml.SelectNodes("//test-case")
+            Write-Host Reading results...
+            Write-Host
+            $err = 0
+            ForEach($case in $test_cases){
+            	if ($case."result" -ne "Passed") {
+            		$err = 1
+            		Write-Host test case  : $case."fullname" -ForegroundColor red
+            		Write-Host result     : $case."result".ToUpper() -ForegroundColor red
+            		Write-Host
+            	} else {
+            		Write-Host test case  : $case."fullname" -ForegroundColor green
+            		Write-Host result     : $case."result" -ForegroundColor green
+            		Write-Host
+            	}
+            }
+            if ($err -eq 1) {
+            	throw "ONE OR MORE TEST FAILED!"
+            } else {
+            	Write-Host All test passed! -ForegroundColor green
+            }

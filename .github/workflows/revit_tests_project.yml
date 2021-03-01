@@ -1,7 +1,9 @@
-name: Build Test Project
+name: 01 - Build Test Project
 
 on:
   workflow_dispatch: 
+  push:
+   branches: [ master ]
 
 jobs:
   build:
@@ -22,3 +24,55 @@ jobs:
       uses: actions/upload-artifact@v2.2.2
       with:
         path: tests\Onbox.Revit.Tests\test_project.zip
+    - name: Post
+      uses: Amadevus/pwsh-script@v2.0.1
+      with:
+       script: |
+        # Acquire token
+        $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+        $headers.Add("Content-Type", "application/x-www-form-urlencoded")
+        $url = "https://developer.api.autodesk.com/authentication/v1/authenticate"
+        $body = "client_id=${{ secrets.CLIENT_ID }}&client_secret=${{ secrets.CLIENT_SECRET }}&grant_type=client_credentials&scope=code%3Aall%20data%3Awrite%20data%3Aread%20bucket%3Acreate%20bucket%3Adelete"
+        $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
+        $token = $response."access_token"
+        Write-Host Acquired adsk token
+        # Upload File
+        $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+        $headers.Add("Authorization", "Bearer $token")
+        $headers.Add("accept-encoding", "gzip, deflate")
+        $headers.Add("Content-Type", "application/zip")
+        $app_id = "revit_tests"
+        $test_project = "tests\Onbox.Revit.Tests\test_project.zip"
+        $url = "https://developer.api.autodesk.com/oss/v2/buckets/${{ secrets.BUCKET_KEY }}/objects/$app_id.zip"
+        $response = Invoke-RestMethod $url -Method 'PUT' -Infile $test_project -Headers $headers
+        Write-Host File Uploaded
+        # Get Download Signed URL
+        $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+        $headers.Add("Authorization", "Bearer $token")
+        $headers.Add("Content-Type", "application/json")
+        $body = "{}"
+        $url = "https://developer.api.autodesk.com/oss/v2/buckets/${{ secrets.BUCKET_KEY }}/objects/$app_id.zip/signed"
+        $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
+        $download_url = $response."signedUrl"
+        Write-Host Got signed input url: Url $download_url
+        # Get Upload Signed URL
+        $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+        $headers.Add("Authorization", "Bearer $token")
+        $headers.Add("Content-Type", "application/json")
+        $body = "{}"
+        $resultFile = "result.xml"
+        $url = "https://developer.api.autodesk.com/oss/v2/buckets/${{ secrets.BUCKET_KEY }}/objects/$resultFile/signed?access=readwrite"
+        $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
+        $upload_url = $response."signedUrl"
+        Write-Host Got result download url: Url $upload_url
+        # Send WorkItem
+        $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+        $headers.Add("Authorization", "Bearer $token")
+        $headers.Add("Content-Type", "application/json")
+        $client_id = "${{ secrets.CLIENT_ID }}"
+        $activity_alias = "ac_tests"
+        $test_assembly_name = "Onbox.Revit.Tests.dll"
+        $url = "https://developer.api.autodesk.com/da/us-east/v3/workitems"
+        $body = "{`n        `"activityId`": `"$client_id.$client_id+$activity_alias`",`n        `"arguments`": {`n          `"inputAssembly`": {`n            `"url`": `"$download_url`"`n          },`n          `"config`": {`n              `"url`": `"data:application/json,{'assemblyPath': '$test_assembly_name'}`"`n          },`n          `"result`": {`n            `"verb`": `"put`",`n            `"url`": `"$upload_url`"`n          }`n        }`n      }"
+        $response = Invoke-RestMethod $url -Method 'POST' -Headers $headers -Body $body
+        Write-Host Workitem sent $response."id" 
